@@ -65,7 +65,7 @@ describe PersonMailer do
      end
      
      it "should have a URL to the connection" do
-       url = "http://#{@server}/connections/#{@connection.id}/edit"
+       url = "http://#{@domain}/connections/#{@connection.id}/edit"
        @email.body.should =~ /#{url}/
      end
    
@@ -98,7 +98,7 @@ describe PersonMailer do
      end
      
      it "should have a link to the comment" do
-       url = "http://#{@server}"
+       url = "http://#{@domain}"
        url += "/blogs/#{@comment.commentable.blog.to_param}"
        url += "/posts/#{@comment.commentable.to_param}"
        @email.body.should =~ /#{url}/
@@ -129,7 +129,7 @@ describe PersonMailer do
      end
      
      it "should have a link to the comment" do
-       url = "http://#{@server}"
+       url = "http://#{@domain}"
        url += "/people/#{@comment.commentable.to_param}#wall"
        @email.body.should =~ /#{url}/
      end
