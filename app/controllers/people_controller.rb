@@ -18,7 +18,7 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     unless @person.active? or current_person.admin?
-      flash[:error] = "That person is not active"
+      flash[:error] = t('flash.person_not_active')
       redirect_to home_url and return
     end
     if logged_in?
@@ -58,12 +58,11 @@ class PeopleController < ApplicationController
         session[:verified_identity_url] = nil
         if global_prefs.email_verifications?
           @person.email_verifications.create
-          flash[:notice] = %(Thanks for signing up! Check your email
-                             to activate your account.)
+          flash[:notice] = t('flash.thanks_sign_up_verify_email')
           format.html { redirect_to(home_url) }
         else
           self.current_person = @person
-          flash[:notice] = "Thanks for signing up!"
+          flash[:notice] = t('flash.thanks_sign_up')
           format.html { redirect_back_or_default(home_url) }
         end
       else
@@ -90,14 +89,14 @@ class PeopleController < ApplicationController
   def verify_email
     verification = EmailVerification.find_by_code(params[:id])
     if verification.nil?
-      flash[:error] = "Invalid email verification code"
+      flash[:error] = t('flash.invalid_email_verification_code')
       redirect_to home_url
     else
       cookies.delete :auth_token
       person = verification.person
       person.email_verified = true; person.save!
       self.current_person = person
-      flash[:success] = "Email verified. Your profile is active!"
+      flash[:success] = t('flash.verified_active')
       redirect_to person
     end
   end
@@ -116,7 +115,7 @@ class PeopleController < ApplicationController
       case params[:type]
       when 'info_edit'
         if !preview? and @person.update_attributes(params[:person])
-          flash[:success] = 'Profile updated!'
+          flash[:success] = t('flash.profile_updated')
           format.html { redirect_to(@person) }
         else
           if preview?
@@ -126,11 +125,11 @@ class PeopleController < ApplicationController
         end
       when 'password_edit'
         if global_prefs.demo?
-          flash[:error] = "Passwords can't be changed in demo mode."
+          flash[:error] = t('flash.no_password_change_in_demo')
           redirect_to @person and return
         end
         if @person.change_password?(params[:person])
-          flash[:success] = 'Password changed.'
+          flash[:success] = t('flash.password_changed')
           format.html { redirect_to(@person) }
         else
           format.html { render :action => "edit" }
@@ -159,6 +158,6 @@ class PeopleController < ApplicationController
     end
     
     def preview?
-      params["commit"] == "Preview"
+      params["commit"] == t('global.preview')
     end
 end

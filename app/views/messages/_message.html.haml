@@ -3,26 +3,25 @@
     = image_link message.other_person(current_person), :image => :thumbnail, :image_options => { :class => "photo" }
   %p
     %span.label
-      Subject:
+      = t('message.subject')
     = link_to sanitize(message.subject), message
   %p
     = message_icon(message)
     - if current_person?(message.sender)
       %span.label
-        To:
+        = t('message.to')
       = person_link message.recipient, :class => "url fn"
     - else
       %span.label
-        From:
+        = t('message.from')
       = person_link message.sender, :class => "url fn"
     %br/
     %span.tools.meta
-      Sent
-      = time_ago_in_words message.created_at
-      ago
-      = link_to image_tag("icons/email_edit.png", :class => 'actioner'),  reply_message_path(message), :title => "Reply to this message"
+      = t 'message.sent'
+      = t('global.ago', :time_ago => time_ago_in_words(message.created_at))
+      = link_to image_tag("icons/email_edit.png", :class => 'actioner'),  reply_message_path(message), :title => t('message.reply_to_this_message')
       - unless message.trashed?(current_person)
-        = link_to image_tag("icons/email_delete.png", :class => 'actioner'),  message_path(message),  :method => :delete,  :confirm => %(Delete this message?), :title => "Delete this message"
+        = link_to image_tag("icons/email_delete.png", :class => 'actioner'),  message_path(message),  :method => :delete,  :confirm => t('message.delete_message_confirmation'), :title => t('message.delete_message')
       - else
-        = link_to "Untrash", undestroy_message_path(message), :method => :put
+        = link_to t('message.untrash'), undestroy_message_path(message), :method => :put
   .clear

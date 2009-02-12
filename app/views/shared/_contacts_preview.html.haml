@@ -1,8 +1,8 @@
 - unless @some_contacts.empty?
   %h2
-    Contacts
+    = t 'person.contacts'
   %ul.grid.contacts.small
     - @some_contacts.each do |contact|
       = render :partial => 'shared/contact', :locals => {:contact => contact}
     %li.more
-      = link_to "All contacts &raquo;", person_connections_path(person)
+      = link_to t('person.see_all_contacts'), person_connections_path(person)

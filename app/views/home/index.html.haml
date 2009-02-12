@@ -1,8 +1,8 @@
 - column_div :type => :primary do
   - if logged_in? and current_person.has_unread_messages?
     .notice
-      You have unread messages in your mailbox.
-      = link_to "Click here to see your messages", messages_path
+      = t 'home.unread_messages_notice'
+      = link_to t('home.unread_messages_link'), messages_path
   = render :partial => 'feed'
 - column_div :type => :secondary do
   = render :partial => "searches/box"
@@ -13,13 +13,13 @@
   - else
     - unless global_prefs.app_name.blank?
       %h2
-        About
+        = t 'home.about'
         = global_prefs.app_name
       %p
-        = link_to "Click here", about_path
-        to learn more about us.
+        = link_to t('global.click_here'), about_path
+        = t 'home.learn_more_about_us'
     %h2
-      Join
-      = global_prefs.app_name.blank? ? "the site" : global_prefs.app_name
+      = t 'person.join'
+      = global_prefs.app_name.blank? ? t('global.the_site') : global_prefs.app_name
     %div{ :style => "text-align: center;" }
       = link_to image_tag("button_signup.png"), signup_path

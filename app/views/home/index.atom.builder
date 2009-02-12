@@ -1,6 +1,6 @@
 activities = @feed
 atom_feed do |feed|
-  feed.title(app_name + " Activity")
+  feed.title(app_name + " " + t('home.activity'))
   feed.updated(activities.first.updated_at)
 
   for activity in activities

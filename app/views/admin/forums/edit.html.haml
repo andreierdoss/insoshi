@@ -1,15 +1,17 @@
 - column_div :type => :primary do
 %h2 
-  Edit Forum
+  = t 'forum.edit_forum'
 = error_messages_for :forum
   - form_for :forum, :url => admin_forum_path(@forum),:html => { :method => :put, :id => 'admin_forums' } do |f|
     .form_row
-      %b Name 
+      %b 
+        = t 'forum.name' 
       %br/
       = f.text_field :name
     .form_row
-      %b Description
+      %b 
+        = t 'forum.description'
       %br/
       = f.text_area :description, :rows => 10
     .form_row
-      = f.submit "Update", :class => "button"
+      = f.submit t('global.update'), :class => "button"

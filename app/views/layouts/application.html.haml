@@ -21,8 +21,7 @@
       #content
         - if global_prefs.demo?
           %p.error{ :style => "font-weight: bold;" }
-            This is a demonstration site.
-            Data may be modified or removed without warning.
+            = t 'global.demo_site'
         - flash.each do |key, msg|
           = content_tag :p, msg, :class => "flash #{key}"
         = yield

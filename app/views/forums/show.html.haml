@@ -1,17 +1,17 @@
 - column_div :type => :primary do
   %h2
-    Discussion topics
+    = t 'forum.discussion_topics'
   %ol.list.forum.full
     = render :partial => 'topics/topic', :collection => @topics
   = will_paginate(@topics)
   - if logged_in?
     %h2
-      New Topic
+      = t 'forum.new_topic'
     - form_for :topic, :url => forum_topics_path(@forum) do |f|
       .form_row
-        = f.label :name, "Subject"
+        = f.label :name, t('forum.subject')
         = f.text_field :name
-        = f.submit "Start", :class => "button"
+        = f.submit t('forum.start'), :class => "button"
 - column_div :type => :secondary do
   = render :partial => 'searches/box'
   = render :partial => 'shared/minifeed'

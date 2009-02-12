@@ -1,10 +1,10 @@
 - column_div :type => :primary do
   %h2
-    Search results
+    = t 'search.search_results'
   = will_paginate(@search)
   - if @results.empty?
     %h3
-      No results
+      = t 'search.no_results'
   - else
     %ul.list.people
       = render :partial => partial(@results), :collection => @results

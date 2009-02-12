@@ -4,7 +4,7 @@
   %ul.list.topic.full
     = render :partial => 'forum_post', :collection => @posts
   %h2
-    Add Reply
+    = t 'topic.add_reply'
   %p
     = formatting_note
   = error_messages_for :post
@@ -13,6 +13,6 @@
     .form_row
       = f.text_area :body, :rows => 10, :cols => 30
     .form_row
-      = f.submit "Submit", :class => "button"
+      = f.submit t('global.submit'), :class => "button"
 - column_div :type => :secondary do
   = render :partial => 'shared/minifeed'

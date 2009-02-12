@@ -1,10 +1,10 @@
 - column_div :type => :primary do
   %h2
-    Messages
+    = t 'message.messages'
   = render :partial => 'message_nav'
   - if @messages.empty?
     %h3.blankslate
-      No messages (yet!)
+      = t 'message.no_messages_yet'
   - else
     = will_paginate
     %ul.list.messages.full

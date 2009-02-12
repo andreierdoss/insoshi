@@ -1,12 +1,11 @@
 %h2
-  = h @blog.person.name
-  's Blog
+  = t 'post.persons_blog', :person => h(@blog.person.name)
 - if current_person?(@blog.person)
   %p
-    = link_to "New blog post", new_blog_post_path(@blog)
+    = link_to t('post.new_blog_post'), new_blog_post_path(@blog)
 - if @posts.empty?
   %h3.blankslate
-    No blog posts (yet)
+    = t 'post.no_blog_posts'
 - else
   %ul.list.blog.full
     = render :partial => 'posts/blog_post', :collection => @posts

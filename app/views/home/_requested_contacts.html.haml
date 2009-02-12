@@ -1,6 +1,6 @@
 - unless @requested_contacts.empty?
   %h2
-    Contact Requests
+    = t 'connection.contact_requests'
   %ul.list.requests.small
     - @requested_contacts.each do |contact|
       - conn = Connection.conn(current_person, contact)
@@ -10,9 +10,8 @@
         %p
           = person_link contact
         %p.meta.published
-          = time_ago_in_words(conn.created_at)
-          ago
+          = t ('global.ago', :time_ago => time_ago_in_words(conn.created_at))
         %p
-          = link_to "Respond", edit_connection_path(conn)
+          = link_to t('connection.respond'), edit_connection_path(conn)
           |
-          = link_to "View profile", contact
+          = link_to t('person.view_profile'), contact

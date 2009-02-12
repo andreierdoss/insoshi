@@ -1,36 +1,36 @@
 - column_div :type => :primary do
-  %h2 Global Preferences
+  %h2= t 'pref.global_prefs'
   .button
-    = link_to 'Edit', edit_admin_preference_path(@preferences)
+    = link_to t('global.edit'), edit_admin_preference_path(@preferences)
   .prefItem
-    .prefLabel Application name
+    .prefLabel= t 'pref.application_name'
     .prefValue= h @preferences.app_name
   .prefItem
-    .prefLabel Email domain
+    .prefLabel= t 'pref.email_domain'
     .prefValue= h @preferences.domain
   .prefItem
-    .prefLabel Server name
+    .prefLabel= t 'pref.server_name'
     .prefValue= h @preferences.server_name
   .prefItem
-    .prefLabel Smtp server
+    .prefLabel= t 'pref.smtp_server'
     .prefValue= h @preferences.smtp_server
   .prefItem
-    .prefLabel Email notifications
+    .prefLabel= t 'pref.email_notifications'
     .prefValue= h @preferences.email_notifications
   .prefItem
-    .prefLabel Email verifications
+    .prefLabel= t 'pref.email_verifications'
     .prefValue= h @preferences.email_verifications
   .prefItem
-    .prefLabel Demo site
+    .prefLabel= t 'pref.demo_site'
     .prefValue= h @preferences.demo
   .prefItem
-    .prefLabel Whitelist
+    .prefLabel= t 'pref.whitelist'
     .prefValue= h @preferences.whitelist
   .prefItem
-    %b About text (nonblank text will lead to an 'about' link)
+    %b= t 'pref.about_meta'
     .prefAbout
       = display @preferences.about
   .prefItem
-    %b Analytics (will be inserted just before the = h("</body>")tag)
+    %b= t 'pref.analytics_meta'
     - unless @preferences.analytics.blank?
       %pre= h @preferences.analytics

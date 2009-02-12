@@ -7,10 +7,9 @@
       = link_to image_tag("icons/email_go.png", :class => "icon" ), @message
   %p
     %span.field
-      From:
+      = t 'message.from'
     = person_link message.sender
   %p.meta.published
-    = time_ago_in_words message.created_at
-    ago
-  %p{ :title => "Subject" }
+    = t ('global.ago', :time_ago => time_ago_in_words(message.created_at))
+  %p{ :title => t('message.subject') }
     = link_to sanitize(truncate(message.subject, 30)), message_path(message, :anchor => message_anchor(message))

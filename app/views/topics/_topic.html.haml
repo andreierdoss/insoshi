@@ -7,14 +7,13 @@
     = link_to h(topic.name),  forum_topic_path(topic.forum, topic, :comments => n), :class => "show-follow"
     %span.meta
       (
-      = pluralize(n, "post")
+      = t ('post', :count => n)
       )
     %p.meta
-      Started by
+      = t 'topic.started_by'
       = person_link topic.person
-      = time_ago_in_words(topic.created_at)
-      ago
+      = t 'global.ago', :time_ago => time_ago_in_words(topic.created_at)
       - if admin?
-        = link_to image_tag("icons/note_edit.png", :class => 'actioner'),   edit_forum_topic_path(topic.forum, topic), :title => 'Edit Topic'
-        = link_to image_tag("icons/note_delete.png", :class => 'actioner'),  forum_topic_path(topic.forum, topic),  :method => :delete, :confirm => "Are you sure you want to delete this Topic?", :title => "Delete Topic"
+        = link_to image_tag("icons/note_edit.png", :class => 'actioner'),   edit_forum_topic_path(topic.forum, topic), :title => t('topic.edit_topic')
+        = link_to image_tag("icons/note_delete.png", :class => 'actioner'),  forum_topic_path(topic.forum, topic),  :method => :delete, :confirm => t('topic.delete_topic_confirmation'), :title => t('topic.delete_topic')
   .clear

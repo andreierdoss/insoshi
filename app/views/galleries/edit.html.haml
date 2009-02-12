@@ -1,6 +1,6 @@
 - column_div :type => :primary do
   %h2
-    Edit gallery
+    = t 'gallery.edit_gallery'
   - form_for(@gallery) do |f|
     .form_row
       = f.label :title
@@ -11,5 +11,5 @@
         = formatting_note
       = f.text_area :description, :rows => 5
     .form_row
-      = f.submit "Update", :class => 'button'
-      = link_to "Cancel", @gallery, :class => "button"
+      = f.submit t('global.update'), :class => 'button'
+      = link_to t('global.cancel'), @gallery, :class => "button"

@@ -1,27 +1,27 @@
 %h1
-  New comment
+  = t 'comment.new_comment'
 = error_messages_for :comment
 - form_for(@comment) do |f|
   %p
     %b
-      Person
+      = t 'comment.person'
     %br/
     = f.text_field :person_id
   %p
     %b
-      Blog
+      = t 'comment.blog'
     %br/
     = f.text_field :blog_id
   %p
     %b
-      Body
+      = t 'comment.body'
     %br/
     = f.text_area :body
   %p
     %b
-      Type
+      = t 'comment.type'
     %br/
     = f.text_field :type
   %p
-    = f.submit "Create"
-= link_to 'Back', comments_path
+    = f.submit t('global.create')
+= link_to t('global.back'), comments_path

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   include PreferencesHelper
   
   before_filter :create_page_view, :require_activation, :tracker_vars,
-                :admin_warning
+                :admin_warning, :set_locale
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
@@ -16,9 +16,15 @@ class ApplicationController < ActionController::Base
 
   private
 
+    def set_locale
+      session[:locale] = params[:locale] if params[:locale]
+      I18n.locale = session[:locale] || I18n.default_locale
+    end
+
+
     def admin_required
       unless current_person.admin?
-        flash[:error] = "Admin access required"
+        flash[:error] = t('flash.admin_access_required')
         redirect_to home_url
       end
     end
@@ -61,13 +67,10 @@ class ApplicationController < ActionController::Base
       default_password = "admin"
       if logged_in? and current_person.admin? 
         if current_person.email =~ /@#{default_domain}$/
-          flash[:notice] = %(Warning: your email address is still at 
-            #{default_domain}.
-            <a href="#{edit_person_path(current_person)}">Change it here</a>.)
+          flash[:notice] = t('flash.email_is_default', :warning => t('global.warning'), :default_domain => default_domain, :edit_person => edit_person_path(current_person))
         end
         if current_person.unencrypted_password == default_password
-          flash[:error] = %(Warning: your password is still the default.
-            <a href="#{edit_person_path(current_person)}">Change it here</a>.)          
+          flash[:error] = t('flash.password_is_default', :warning => t('global.warning'), :edit_person => edit_person_path(current_person))        
         end
       end
     end

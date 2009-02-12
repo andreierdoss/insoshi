@@ -1,6 +1,5 @@
 %h2
-  = @person.name
-  's Comment Wall
+  = t 'person.comment_wall', :person => @person.name
 %a{ :name => "wall" }
 - if connected_to?(@person)
   %p
@@ -9,14 +8,12 @@
     .form_row
       = f.text_area :body, :rows => 2, :cols => 80
     .form_row
-      = submit_tag "Submit", :class => "button"
+      = submit_tag t('global.submit'), :class => "button"
 - else
   %p
-    You must be connected to
-    = h @person.name
-    to leave a wall comment.
+    = t 'connection.must_be_connected_notice', :person => h(@person.name)
   %p
-    = link_to "Connect with #{h @person.name} now", person_connections_path(@person), :method => :post
+    = link_to t('connection.connect_now', :person => h(@person.name)), person_connections_path(@person), :method => :post
 - unless @person.comments.empty?
   %ul.list.comments.full
     = render :partial => 'comment', :collection => @person.comments

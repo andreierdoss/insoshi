@@ -1,21 +1,21 @@
 #profile{ :style => "display: none;" }
   - tabs = TabsRenderer.new(self, :id => "tabCol")
-  - tabs.create('tProfile', 'Profile', :class => "profile vcard") do
+  - tabs.create('tProfile', t('person.profile_tab'), :class => "profile vcard") do
     = render :partial => 'profile'
     .clear
-  - tabs.create('tWall', 'Wall') do
+  - tabs.create('tWall', t('person.wall_tab')) do
     = render :partial => 'wall'
     .clear
-  - tabs.create('tRecentActivity', 'Recent Activity') do
+  - tabs.create('tRecentActivity', t('person.recent_activity_tab')) do
     = render :partial => 'recent_activity'
     .clear
-  - tabs.create('tContacts', 'Contacts') do
+  - tabs.create('tContacts', t('person.contacts_tab')) do
     = render :partial => 'profile_contacts'
     .clear
-  - tabs.create('tBlog', 'Blog') do
+  - tabs.create('tBlog', t('person.blog_tab')) do
     = render :partial => 'shared/blog'
     .clear
-  - tabs.create('tGalleries', 'Galleries') do
+  - tabs.create('tGalleries', t('person.galleries_tab')) do
     = render :partial => "shared/galleries", :locals => { :galleries => @galleries }
     .clear
   = tabs.render

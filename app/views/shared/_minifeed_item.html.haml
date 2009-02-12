@@ -5,5 +5,4 @@
     %p
       = minifeed_message minifeed_item
     %p.meta.published
-      = time_ago_in_words minifeed_item.created_at
-      ago
+      = t 'global.ago', :time_ago => time_ago_in_words(minifeed_item.created_at)

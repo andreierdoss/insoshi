@@ -1,15 +1,15 @@
 %h1
-  Listing comments
+  = t 'comment.listing_comments'
 %table
   %tr
     %th
-      Person
+      = t 'comment.person'
     %th
-      Blog
+      = t 'comment.blog'
     %th
-      Body
+      = t 'comment.body'
     %th
-      Type
+      = t 'comment.type'
   - for comment in @comments
     %tr
       %td
@@ -21,10 +21,10 @@
       %td
         = h comment.type
       %td
-        = link_to 'Show', comment
+        = link_to t('global.show'), comment
       %td
-        = link_to 'Edit', edit_comment_path(comment)
+        = link_to t('global.edit'), edit_comment_path(comment)
       %td
-        = link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete
+        = link_to t('global.destroy'), comment, :confirm => t('global.are_you_sure'), :method => :delete
 %br/
-= link_to 'New comment', new_comment_path
+= link_to t('comment.new_comment'), new_comment_path

@@ -1,16 +1,16 @@
 - column_div :type => :primary do
   %h2
-    New gallery
+    = t('gallery.new_gallery')
   - form_for(@gallery) do |f|
     .form_row
       %label{ :for => "title" }
-        Title
+        = t('gallery.title')
       = f.text_field :title
     = set_focus_to "gallery_title"
     .form_row
       %label{ :for => "description" }
-        Description
+        = t('gallery.description')
       = f.text_area :description, :rows => 5
     .form_row
-      = f.submit "Create", :class => "button"
-      = link_to "Cancel", person_galleries_path(current_person)
+      = f.submit t('global.create'), :class => "button"
+      = link_to t('global.cancel'), person_galleries_path(current_person)

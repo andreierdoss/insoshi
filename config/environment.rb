@@ -73,6 +73,9 @@ Rails::Initializer.run do |config|
   #                                    :lib => 'will_paginate',
   #                                    :source => 'http://gems.github.com'
   config.gem 'chronic'
+
+  # i18n
+  config.i18n.default_locale = :en
 end
 
 require 'vendor/plugins/jquery_ui_rails_helpers/helpers/tabs_renderer'

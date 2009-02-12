@@ -11,7 +11,7 @@ class ActivitiesController < ApplicationController
   # DELETE /activities/1.xml
   def destroy
     @activity.destroy
-    flash[:success] = "Activity deleted"
+    flash[:success] = t('flash.activity_deleted')
 
     respond_to do |format|
       format.html { redirect_to(person_url(current_person)) }
