@@ -1,0 +1,11 @@
+%h2
+  = t 'connection.contact_request'
+%p
+  = image_link @contact, :image => :thumbnail
+%p
+  = t 'connection.contact_request_from'
+  = @contact.name
+- form_for(@connection) do |f|
+  %p
+    = f.submit t('connection.accept'), :class => "button"
+    = f.submit t('connection.decline'), :id => nil, :class => "button"

@@ -1,0 +1,13 @@
+- column_div :type => :primary do
+  = error_messages_for :photo
+  %h2
+    = t 'photo.update_photo'
+  %p
+    = image_tag(@display_photo.public_filename(:thumbnail))
+  - form_for @photo do |f|
+    .form_field
+      = f.label :title
+      = f.text_field :title
+    .form_field
+      = submit_tag t('global.update'), :class => 'button'
+      = link_to t('global.cancel'), gallery_path(@photo.gallery)

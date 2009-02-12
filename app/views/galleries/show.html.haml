@@ -1,0 +1,24 @@
+#photos
+  %h2
+    = t('gallery.photos_in_gallery', :gallery => h(@gallery.title))
+  - unless @gallery.description.nil?
+    .gallery-description
+      - unless @gallery.description.blank?
+        %p
+          %strong
+            = t 'gallery.description'
+          = @gallery.description
+  %p
+    - if current_person?(@gallery.person)
+      = link_to t('photo.add_photo'), new_gallery_photo_path(@gallery)
+      |
+      = link_to t('gallery.edit_gallery'), edit_gallery_path
+      |
+    = link_to t('gallery.all_galleries'), person_path(@gallery.person, :anchor => 'tGalleries')
+  - if @photos.empty?
+    %h3
+      = t 'gallery.no_photos_yet'
+  - else
+    %ul
+      = render :partial=>"shared/photo", :collection => @photos
+    = will_paginate(@photos)

@@ -1,0 +1,5 @@
+%h2
+  = t 'post.new_post'
+= error_messages_for :post
+= render :partial => 'forum_form', :locals => { :url => forum_topic_posts_path(@forum, @topic), :method => :post }
+= link_to t('global.back'), forum_topic_path(@forum, @topic)

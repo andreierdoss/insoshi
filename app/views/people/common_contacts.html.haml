@@ -1,0 +1,14 @@
+- column_div :type => :primary do
+  %h2
+    = t 'person.common_contacts_with'
+    = @person.name
+  - unless @common_contacts.empty?
+    = will_paginate(@common_contacts)
+    %ul.list.people
+      = render :partial => 'people/person', :collection => @common_contacts
+    = will_paginate(@common_contacts)
+  - else
+    %h2
+      = t 'person.no_contacts_in_common'
+- column_div :type => :secondary do
+  = render :partial => 'shared/minifeed'

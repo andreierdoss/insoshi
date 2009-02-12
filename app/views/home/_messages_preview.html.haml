@@ -1,0 +1,7 @@
+- unless current_person.recent_messages.empty?
+  %h2
+    = t 'message.messages'
+  %ul.list.messages.small
+    = render :partial => 'message', :collection => current_person.recent_messages
+    %li.more
+      = link_to t ('message.all_messages'), messages_path

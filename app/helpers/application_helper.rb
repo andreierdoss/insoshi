@@ -11,34 +11,34 @@ module ApplicationHelper
   ## Menu helpers
   
   def menu
-    home     = menu_element("Dashboard",   home_path)
-    people   = menu_element("People", people_path)
+    home     = menu_element(t('home.dashboard'), home_path)
+    people   = menu_element(t('home.people'), people_path)
     if Forum.count == 1
-      forum = menu_element("Forum", forum_path(Forum.find(:first)))
+      forum = menu_element(t('home.forum'), forum_path(Forum.find(:first)))
     else
-      forum = menu_element("Forums", forums_path)
+      forum = menu_element(t('forum.forums'), forums_path)
     end
-    resources = menu_element("Resources", "http://docs.insoshi.com/")
+    resources = menu_element(t('home.resources'), "http://docs.insoshi.com/")
 
     if logged_in? and not admin_view?
-      profile  = menu_element("Profile",  person_path(current_person))
-      messages = menu_element("Messages", messages_path)
+      profile  = menu_element(t('person.profile_tab'),  person_path(current_person))
+      messages = menu_element(t('message.messages'), messages_path)
       #blog     = menu_element("Blog",     blog_path(current_person.blog))
       #photos   = menu_element("Photos",   photos_path)
       #contacts = menu_element("Contacts",
       #                        person_connections_path(current_person))
-      events   = menu_element("Events", events_path)
+      events   = menu_element(t('event.events'), events_path)
       #links = [home, profile, contacts, messages, blog, people, forum]
       links = [home, profile, messages, people, forum]
       # TODO: put this in once events are ready.
       # links.push(events)
       
     elsif logged_in? and admin_view?
-      home =    menu_element("Home", home_path)
-      people =  menu_element("People", admin_people_path)
-      forums =  menu_element(inflect("Forum", Forum.count),
+      home =    menu_element(t('home.home'), home_path)
+      people =  menu_element(t('home.people'), admin_people_path)
+      forums =  menu_element(inflect(t('home.forum'), Forum.count),
                              admin_forums_path)
-      preferences = menu_element("Prefs", admin_preferences_path)
+      preferences = menu_element(t('pref.prefs'), admin_preferences_path)
       links = [home, people, forums, preferences]
     else
       links = [home, people]
@@ -46,7 +46,7 @@ module ApplicationHelper
     if global_prefs.about.blank?
       links
     else
-      links.push(menu_element("About", about_url))
+      links.push(menu_element(t('home.about'), about_url))
     end
   end
 
@@ -65,9 +65,9 @@ module ApplicationHelper
   end
   
   def login_block
-    forgot = global_prefs.can_send_email? ? '<br />' + link_to('I forgot my password', new_password_reminder_path) : ''
-    content_tag(:span, link_to("Sign in", login_path) + ' or ' +
-                       link_to("Sign up", signup_path) + 
+    forgot = global_prefs.can_send_email? ? '<br />' + link_to(t('password_reminder.forgot_password'), new_password_reminder_path) : ''
+    content_tag(:span, link_to(t('session.sign_in'), login_path) + t('global.or') +
+                       link_to(t('person.sign_up'), signup_path) + 
                        forgot)
   end
 
@@ -131,9 +131,9 @@ module ApplicationHelper
     end
     img = image_tag("icons/email_add.png")
     if reply.nil?
-      action = to_all.nil? ? "Send Message" : "Message to Everyone"
+      action = to_all.nil? ? t('message.send_message') : t('message.message_everyone')
     else
-      action = "Send Reply"
+      action = t('message.send_reply')
     end
     opts = { :class => 'email-link' }
     if use_image

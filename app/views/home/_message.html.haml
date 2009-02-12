@@ -1,0 +1,15 @@
+%li
+  .profile-image
+    = image_link message.sender
+    - if not message.read? and not current_person?(message.sender)
+      = link_to image_tag("icons/email_add.png", :class => "icon"), @message
+    - elsif message.replied_to?
+      = link_to image_tag("icons/email_go.png", :class => "icon" ), @message
+  %p
+    %span.field
+      = t 'message.from'
+    = person_link message.sender
+  %p.meta.published
+    = t ('global.ago', :time_ago => time_ago_in_words(message.created_at))
+  %p{ :title => t('message.subject') }
+    = link_to sanitize(truncate(message.subject, 30)), message_path(message, :anchor => message_anchor(message))

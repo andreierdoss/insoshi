@@ -1,0 +1,11 @@
+- # The activity shouldn't be nil, but we're wearing a belt and suspenders.
+- unless activity.item.nil?
+  %li
+    %p.activity_detail
+      = feed_icon activity
+      - recent ||= false
+      = feed_message(activity, recent)
+    %p.meta.published.clear
+      = t 'global.ago', :time_ago => time_ago_in_words(activity.created_at).capitalize
+      - if current_person?(activity.person)
+        = link_to(image_tag("icons/comment_delete.png", :class => 'actioner'),  activity_path(activity),  :method => :delete,  :confirm => t('activity.delete_activity_confirmation'), :title => t('activity.delete_activity'))

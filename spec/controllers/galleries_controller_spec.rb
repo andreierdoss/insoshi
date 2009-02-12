@@ -62,9 +62,10 @@ describe GalleriesController do
     
     it "should not destroy the final gallery" do
       delete :destroy, :id => @person.galleries.first
-      flash[:success].should =~ /successfully deleted/
+      #flash[:success].should =~ /successfully deleted/
+      flash[:success].should =~ t('flash.gallery_destroyed')
       delete :destroy, :id => @person.reload.galleries.first
-      flash[:error].should =~ /can't delete the final gallery/
+      flash[:error].should =~ t('flash.at_least_one_gallery')
     end
   end
 end

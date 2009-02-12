@@ -33,7 +33,7 @@ class PhotosController < ApplicationController
   def create
     if params[:photo].nil?
       # This is mainly to prevent exceptions on iPhones.
-      flash[:error] = "Your browser doesn't appear to support file uploading"
+      flash[:error] = t('flash.browser_no_file_upload')
       redirect_to gallery_path(Gallery.find(params[:gallery_id])) and return
     end
 
@@ -42,7 +42,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        flash[:success] = "Photo successfully uploaded"
+        flash[:success] = t('flash.photo_uploaded')
         format.html { redirect_to @photo.gallery }
       else
         format.html { render :action => "new" }
@@ -55,7 +55,7 @@ class PhotosController < ApplicationController
     
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
-        flash[:success] = "Photo successfully updated"
+        flash[:success] = t('flash.photo_updated')
         format.html { redirect_to(gallery_path(@photo.gallery)) }
       else
         format.html { render :action => "new" }
@@ -67,7 +67,7 @@ class PhotosController < ApplicationController
     @gallery = @photo.gallery
     redirect_to person_galleries_path(current_person) and return if @photo.nil?
     @photo.destroy
-    flash[:success] = "Photo deleted"
+    flash[:success] = t('flash.photo_deleted')
     respond_to do |format|
       format.html { redirect_to gallery_path(@gallery) }
     end
@@ -84,10 +84,10 @@ class PhotosController < ApplicationController
       if @photo.update_attributes(:primary => true)
         @old_primary.each { |p| p.update_attributes!(:primary => false) }
         format.html { redirect_to(person_galleries_path(current_person)) }
-        flash[:success] = "Gallery thumbnail set"
+        flash[:success] = t('flash.gallery_thumbnail_set')
       else    
         format.html do
-          flash[:error] = "Invalid image!"
+          flash[:error] = t('flash.invalid_image')
           redirect_to home_url
         end
       end
@@ -105,11 +105,11 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if @photo.update_attributes!(:avatar => true)
         @old_primary.each { |p| p.update_attributes!(:avatar => false) }
-        flash[:success] = "Profile photo set"
+        flash[:success] = t('flash.profile_photo_set')
         format.html { redirect_to current_person }
       else    
         format.html do
-          flash[:error] = "Invalid image!"
+          flash[:error] = t('flash.invalid_image')
           redirect_to home_url
         end
       end
@@ -129,12 +129,12 @@ class PhotosController < ApplicationController
     
     def correct_gallery_requried
       if params[:gallery_id].nil?
-        flash[:error] = "You cannot add photo without specifying gallery"
+        flash[:error] = t('flash.no_photo_without_gallery')
         redirect_to home_path
       else
         @gallery = Gallery.find(params[:gallery_id])
         if @gallery.person != current_person
-          flash[:error] = "You cannot add photos to this gallery"
+          flash[:error] = t('flash.no_photo_to_gallery')
           redirect_to gallery_path(@gallery)
         end
       end

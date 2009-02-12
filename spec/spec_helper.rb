@@ -90,4 +90,9 @@ Spec::Runner.configure do |config|
   def enable_email_notifications
     Preference.find(:first).update_attributes(:email_verifications => true)      
   end
+  
+  # I18n translation
+  def t(str, options = {})
+    Regexp.new(I18n.t(str, options))
+  end
 end
