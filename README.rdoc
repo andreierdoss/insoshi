@@ -67,6 +67,8 @@ You probably have Rails already, but might not have the others.
   $ sudo gem install mysql     # for mysql support
   $ sudo gem install postgres  # for postgres support
   $ sudo gem install chronic
+  $ sudo gem install rspec
+  $ sudo gem install haml
 
 If you're using FreeImage/ImageScience, you'll also need the image_science gem:
 
