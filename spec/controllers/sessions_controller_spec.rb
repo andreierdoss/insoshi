@@ -83,7 +83,7 @@ describe SessionsController do
     post :create, :email => @person.email,
                   :password => @person.unencrypted_password
     response.should redirect_to(home_url)
-    flash[:error].should =~ /deactivated/
+    flash[:error].should =~ t('flash.account_deactivated')
   end
   
   it "should redirect users with unverified email addresses" do
@@ -93,7 +93,7 @@ describe SessionsController do
     post :create, :email => @person.email,
                   :password => @person.unencrypted_password
     response.should redirect_to(login_url)
-    flash[:notice].should =~ /check your email/
+    flash[:notice].should =~ t('flash.unverified_email')
   end
 
   def auth_token(token)

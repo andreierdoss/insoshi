@@ -1,0 +1,17 @@
+#footer
+  %p#footer-nav
+    %a{ :href => "/" }
+      = t 'home.dashboard'
+    |
+    %a{ :href => "/messages" }
+      = t 'home.my_messages'
+    |
+    %a{ :href => "/people" }
+      = t 'home.people'
+    |
+    %a{ :href => "/forums" }
+      = t 'home.forum'
+  = render :partial => 'shared/powered_by', :class => 'powered_by'
+  - unless test?
+    %img{ :src => "http://stats.insoshi.com/#{@tracker_id}?env=#{@env}", :height => "1", :alt => "", :width => "1" }
+ 

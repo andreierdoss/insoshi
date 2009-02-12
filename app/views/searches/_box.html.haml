@@ -1,0 +1,8 @@
+%h2
+  = t 'search.search'
+  = search_type
+- form_tag searches_path, :method => :get, :id => "frmSearch" do
+  %fieldset{ :title => t('search.search') }
+    = text_field_tag :q, h(params[:q]), :id => "txtSearch", :class => "txt", :maxlength => 50
+    = submit_tag t('search.search'), :name => nil, :id => "btnSearch", :class => "button"
+    = hidden_field_tag "model", search_model

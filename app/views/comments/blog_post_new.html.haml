@@ -1,0 +1,10 @@
+%h2
+  = t 'comment.blog_comment'
+= error_messages_for :comment
+%h3
+  = t 'comment.leave_a_comment'
+- form_for :comment, :url => blog_post_comments_path(@blog, @post) do |f|
+  .form_row
+    = f.text_area :body
+  .form_row
+    = submit_tag t('global.submit'), :class => "button"

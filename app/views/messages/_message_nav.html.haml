@@ -1,0 +1,5 @@
+%ul#message-nav
+  = list_link_with_active t('message.inbox'), messages_path
+  = list_link_with_active t('message.sent'), sent_messages_path
+  = list_link_with_active t('message.trash'), trash_messages_path
+  -#= link_to t('message.new_message'), new_message_path

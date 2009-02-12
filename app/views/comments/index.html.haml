@@ -1,0 +1,30 @@
+%h1
+  = t 'comment.listing_comments'
+%table
+  %tr
+    %th
+      = t 'comment.person'
+    %th
+      = t 'comment.blog'
+    %th
+      = t 'comment.body'
+    %th
+      = t 'comment.type'
+  - for comment in @comments
+    %tr
+      %td
+        = h comment.person_id
+      %td
+        = h comment.blog_id
+      %td
+        = h comment.body
+      %td
+        = h comment.type
+      %td
+        = link_to t('global.show'), comment
+      %td
+        = link_to t('global.edit'), edit_comment_path(comment)
+      %td
+        = link_to t('global.destroy'), comment, :confirm => t('global.are_you_sure'), :method => :delete
+%br/
+= link_to t('comment.new_comment'), new_comment_path

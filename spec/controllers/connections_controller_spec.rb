@@ -41,13 +41,13 @@ describe ConnectionsController do
     end
 
     it "should accept the connection" do
-      put :update, :id => @connection, :commit => "Accept"
+      put :update, :id => @connection, :commit => I18n.t('connection.accept')
       Connection.find(@connection).status.should == Connection::ACCEPTED
       response.should redirect_to(home_url)
     end
     
     it "should decline the connection" do
-      put :update, :id => @connection, :commit => "Decline"
+      put :update, :id => @connection, :commit => I18n.t('connection.decline')
       @connection.should_not exist_in_database
       response.should redirect_to(home_url)
     end

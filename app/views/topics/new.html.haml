@@ -1,0 +1,7 @@
+%h2
+  = t 'topic.new_topic'
+= error_messages_for :topic
+- form_for :topic, :url => forum_topics_path(@forum)  do |f|
+  .form_row
+    = f.text_field :name
+    = f.submit t('global.submit'), :class => "button"

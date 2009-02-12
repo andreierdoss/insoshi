@@ -1,0 +1,14 @@
+- column_div :type => :primary do
+  %h2
+    = t 'message.messages'
+  = render :partial => 'message_nav'
+  - if @messages.empty?
+    %h3.blankslate
+      = t 'message.no_messages_yet'
+  - else
+    = will_paginate
+    %ul.list.messages.full
+      = render :partial => @messages
+    = will_paginate
+- column_div :type => :secondary do
+  = render :partial => 'searches/box'

@@ -22,7 +22,7 @@ class GalleriesController < ApplicationController
     @gallery = current_person.galleries.build(params[:gallery])
     respond_to do |format|
       if @gallery.save
-        flash[:success] = "Gallery successfully created"
+        flash[:success] = t('flash.gallery_created')
         format.html { redirect_to gallery_path(@gallery) }
       else
         format.html { render :action => "new" }
@@ -38,7 +38,7 @@ class GalleriesController < ApplicationController
     @gallery = Gallery.find(params[:id])
     respond_to do |format|
       if @gallery.update_attributes(params[:gallery])
-        flash[:success] = "Gallery successfully updated"
+        flash[:success] = t('flash.gallery_updated')
         format.html { redirect_to gallery_path(@gallery) }
       else
         format.html { render :action => "new" }
@@ -48,11 +48,11 @@ class GalleriesController < ApplicationController
   
   def destroy
     if current_person.galleries.count == 1
-      flash[:error] = "You can't delete the final gallery"
+      flash[:error] = t('flash.at_least_one_gallery')
     elsif Gallery.find(params[:id]).destroy
-      flash[:success] = "Gallery successfully deleted"
+      flash[:success] = t('flash.gallery_destroyed')
     else
-      flash[:error] = "Gallery could not be deleted"
+      flash[:error] = t('flash.gallery_not_destroyed')
     end
 
     respond_to do |format|
@@ -66,10 +66,10 @@ class GalleriesController < ApplicationController
     def correct_user_required
       @gallery = Gallery.find(params[:id])
       if @gallery.nil?
-        flash[:error] = "No gallery found"
+        flash[:error] = t('flash.gallery_not_found')
         redirect_to person_galleries_path(current_person)
       elsif @gallery.person != current_person
-        flash[:error] = "You are not the owner of this gallery"
+        flash[:error] = t('flash.not_owner_of_gallery')
         redirect_to person_galleries_path(@gallery.person)
       end
     end

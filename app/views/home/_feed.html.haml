@@ -1,0 +1,4 @@
+%h2
+  = t 'home.activity_feed'
+%ul.list.activity.full
+  = render :partial => 'shared/activity', :collection => @feed

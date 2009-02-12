@@ -1,0 +1,17 @@
+- unless @requested_contacts.empty?
+  %h2
+    = t 'connection.contact_requests'
+  %ul.list.requests.small
+    - @requested_contacts.each do |contact|
+      - conn = Connection.conn(current_person, contact)
+      %li
+        .profile-image
+          = image_link contact
+        %p
+          = person_link contact
+        %p.meta.published
+          = t ('global.ago', :time_ago => time_ago_in_words(conn.created_at))
+        %p
+          = link_to t('connection.respond'), edit_connection_path(conn)
+          |
+          = link_to t('person.view_profile'), contact

@@ -1,0 +1,36 @@
+- column_div :type => :primary do
+  %h2= t 'pref.global_prefs'
+  .button
+    = link_to t('global.edit'), edit_admin_preference_path(@preferences)
+  .prefItem
+    .prefLabel= t 'pref.application_name'
+    .prefValue= h @preferences.app_name
+  .prefItem
+    .prefLabel= t 'pref.email_domain'
+    .prefValue= h @preferences.domain
+  .prefItem
+    .prefLabel= t 'pref.server_name'
+    .prefValue= h @preferences.server_name
+  .prefItem
+    .prefLabel= t 'pref.smtp_server'
+    .prefValue= h @preferences.smtp_server
+  .prefItem
+    .prefLabel= t 'pref.email_notifications'
+    .prefValue= h @preferences.email_notifications
+  .prefItem
+    .prefLabel= t 'pref.email_verifications'
+    .prefValue= h @preferences.email_verifications
+  .prefItem
+    .prefLabel= t 'pref.demo_site'
+    .prefValue= h @preferences.demo
+  .prefItem
+    .prefLabel= t 'pref.whitelist'
+    .prefValue= h @preferences.whitelist
+  .prefItem
+    %b= t 'pref.about_meta'
+    .prefAbout
+      = display @preferences.about
+  .prefItem
+    %b= t 'pref.analytics_meta'
+    - unless @preferences.analytics.blank?
+      %pre= h @preferences.analytics

@@ -1,0 +1,58 @@
+- column_div :type => :primary do
+  %h2= t 'pref.edit_global_prefs'
+  = error_messages_for :preferences
+  - form_for :preferences, :url => admin_preference_path(@preferences), :html => { :method => :put, :id => 'admin_preferences' } do |f|
+    .form_row
+      = f.label :app_name, t('pref.application_name')
+      = f.text_field :app_name
+    .form_row
+      = f.label :domain, t('pref.email_domain')
+      = f.text_field :domain
+    .form_row
+      = f.label :server_name, t('pref.server_name')
+      = f.text_field :server_name
+    .form_row
+      = f.label :smtp_server, t('pref.smtp_server')
+      = f.text_field :smtp_server
+    .form_row
+      = f.label :email_notifications, t('pref.send_notices'), :class => 'checkbox'
+      = f.check_box :email_notifications
+    %p.meta
+      = t 'pref.send_notices_meta'
+    .form_row
+      = f.label :demo, t('pref.demo_site'), :class => 'checkbox'
+      = f.check_box :demo
+    %p.meta
+      = t('pref.demo_site_meta')
+    %br/
+    %p
+      = t('pref.whitelist_meta')
+    .form_row
+      %label.checkbox{ :for => "whitelist" }
+        = t('pref.whitelist')
+      = f.check_box :whitelist
+    %br/
+    %p
+      = t 'pref.verify_email_meta'
+    .form_row
+      = f.label :email_verifications, t('pref.verify_email'), :class => 'checkbox'
+      = f.check_box :email_verifications
+    %p.meta
+      = t 'pref.activation_code_meta'
+    .form_row
+      = f.label :about
+      %p= formatting_note
+      = fckeditor_textarea("preferences", :about,  :toolbarSet => 'InsoshiBase', :width => '100%',  :height => RICH_TEXT_HEIGHT)
+      - # f.text_area :about, :rows => 10
+    %br/
+    %p.meta
+      = t 'pref.keep_it_short_meta'
+    %br/
+    .form_row
+      = f.label :analytics
+      = f.text_area :analytics, :rows => 10
+    %p.meta
+      = t 'pref.analytics_meta'
+    .form_row
+      = f.submit t('global.update'), :class => "button"
+      = link_to t('global.cancel'), admin_preferences_path

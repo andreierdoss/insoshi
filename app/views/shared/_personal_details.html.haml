@@ -1,0 +1,23 @@
+- column_div :type => :primary do
+  %h2
+    = t 'person.edit_personal_info'
+  = error_messages_for :personal_details
+  - form_for personal_details do |f|
+    .form_row
+      %label{ :for => "email" }
+        = t 'person.email'
+        %span.small
+          (
+          = t 'person.never_made_public'
+          = ", " + t('person.will_be_verified') if global_prefs.email_verifications?
+          )
+      = f.text_field :email, :maxlength => Person::MAX_EMAIL
+      = set_focus_to "person_email"
+    .form_row
+      %label{ :for => "name" }
+        = t 'person.name'
+        %span.small
+          = t 'person.will_be_displayed'
+      = f.text_field :name, :maxlength => Person::MAX_NAME
+    .form_row
+      = submit_tag t('person.sign_up'), :class => "button"

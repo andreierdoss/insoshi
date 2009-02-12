@@ -1,0 +1,17 @@
+%h2 
+  = t 'forum.new_forum'
+= error_messages_for :forum
+- form_for :forum, :url => admin_forums_path do |f|
+  %p
+    %b 
+      = t 'forum.name'
+    %br/
+    = f.text_field :name
+  %p
+    %b 
+      = t 'forum.description'
+    %br/
+    = f.text_area :description
+  %p
+    = f.submit t('global.create')
+= link_to t('global.back'), forums_path

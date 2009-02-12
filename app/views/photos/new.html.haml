@@ -1,0 +1,14 @@
+%h2
+  = t 'photo.add_a_photo'
+= error_messages_for :photo
+%h3
+  = t 'photo.select_new_image'
+- form_for @photo,:url=>{:controller => :photos, :action => :create, :gallery_id => @gallery}, :html => { :multipart => true } do |f|
+  .form_field
+    = f.file_field :uploaded_data
+  .form_field
+    = f.label :title
+    = f.text_field :title
+  .form_field
+    = submit_tag t('global.upload'), :class => 'button'
+    = link_to t('global.cancel'), @gallery, :class => "button", :id => "cancel"

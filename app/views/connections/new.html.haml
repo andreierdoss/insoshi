@@ -1,0 +1,22 @@
+%h1
+  = t 'connection.new_connection'
+= error_messages_for :connection
+- form_for(@connection) do |f|
+  %p
+    %b
+      = t 'connection.person'
+    %br/
+    = f.text_field :person_id
+  %p
+    %b
+      = t 'connection.connection'
+    %br/
+    = f.text_field :contact_id
+  %p
+    %b
+      = t 'connection.status'
+    %br/
+    = f.text_field :status
+  %p
+    = f.submit t('global.create')
+= link_to t('global.back'), connections_path

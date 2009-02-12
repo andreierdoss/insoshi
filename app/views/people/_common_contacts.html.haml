@@ -1,0 +1,9 @@
+- unless current_person?(@person) or @common_contacts.empty?
+  %h2 
+    = t 'person.common_contacts'
+  - if @common_contacts.length > Person::MAX_DEFAULT_CONTACTS
+    .button.see_all_link
+    = link_to t('global.see_all'), common_contacts_person_path(@person)
+  %ul.grid.contacts.medium
+    - @some_common_contacts.each do |contact|
+      = render :partial => 'shared/contact_medium', :locals => { :contact => contact }

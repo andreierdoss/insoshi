@@ -1,0 +1,48 @@
+%h2
+  %span.fn.n
+    = t 'person.profile', :person => h(@person.name)
+- if current_person?(@person) || current_person.admin?
+  .button_container
+- if current_person.admin?
+  - activity = activated_status(@person)
+  = link_to activity, admin_person_path(@person, :task => "deactivated"), :method => :put
+  = "|" if current_person?(@person)
+- if current_person?(@person)
+  = link_to t('person.edit_profile'), edit_person_path(@person)
+  |
+  = link_to t('photo.change_photo'), @person.galleries.first
+- if current_person?(@person) || current_person.admin?
+  .clear
+- if admin? and not @person.active?
+  %p.error
+    = t 'person.not_active'
+- if current_person?(@person) && current_person.description.blank?
+  .error
+    = t 'person.description_blank_notice'
+    = link_to t('person.description_blank_link'),  edit_person_path(@person)
+.toolbox
+  = image_tag @person.main_photo, :class => "profile-image photo", :alt => h(@person.name)
+  - unless current_person?(@person)
+    %h3= @person.name
+    %ul.tools
+      - if logged_in?
+        - unless Connection.exists?(@person, current_person)
+          %li
+            = link_to t('connection.request_connection'), person_connections_path(@person), :method => :post
+      - if Connection.connected?(@person, current_person)
+        %li
+          = t 'connection.connected_notice'
+          = link_to image_tag('icons/user_delete.png'), connection_path(Connection.conn(current_person, @person)),  :method => :delete, :title => t('connection.remove_connection'), :confirm => t('connection.remove_connection_confirmation')
+      - if Connection.pending?(current_person, @person)
+        %li
+          = t 'connection.contacted_you', :person => h(@person.name)
+          %br/
+          (
+          = link_to t('connection.respond_to_request'),  edit_connection_path(Connection.conn(current_person, @person))
+          )
+      - if Connection.pending?(@person, current_person)
+        %li
+          = t 'connection.you_contacted', :person => h(@person.name)
+      %li
+        = email_link(@person)
+= display @person.description
